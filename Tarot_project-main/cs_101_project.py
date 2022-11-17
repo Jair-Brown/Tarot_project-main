@@ -67,6 +67,7 @@ class Tarot:
         self.number_card = int(input("Hello my friend. How many cards would you like in your spread today? "))
         self.hand = []
         
+
         
 
     def cards(self):
@@ -98,10 +99,15 @@ class Tarot:
             choices = [a,b]
             show_hand.append(random.choice(choices))
         # print(show_hand)
-        spread = {name[i]: show_hand[i] for i in range(len(name))}
+        spread = {name[i]:show_hand[i] for i in range(len(name))}
         for j in spread.keys():
             print (" Your card " + j + " symbolizes: " + spread[j])
-        # return spread.values(), spread.keys()
+
+        # return show_hand
+
+    # def show_hands(self, show_hand):
+    #     print(show_hand)
+    #     # return spread.values(), spread.keys()
 
         
     

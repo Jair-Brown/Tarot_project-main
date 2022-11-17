@@ -1,4 +1,7 @@
 import random
+from tkinter import *
+from tkinter import ttk
+
 
 deck = [
     {"name": 'The Fool', 'Upright': 'Beginnings, Possibilities, Pleasure, Adventure, Opportunity',
@@ -35,7 +38,7 @@ deck = [
     {"name": 'The Hanged Man', 'Upright': 'Change, Reversal, Boredom, Improvement, Rebirth, Suspension, Change',
      'Reversed': 'False Prophecy, Useless Sacrifice, Unwillingness'},
     {"name": 'Death', 'Upright': 'Unexpected Change, Loss, Failure, Transformation, Death, Bad Luck',
-     'Reversed': 'Immobility, SLow changes, Cheating, Death, Stagnation'},
+     'Reversed': 'Immobility, Slow changes, Cheating, Death, Stagnation'},
     {"name": 'Temperance', 'Upright': 'Patience, Good Influence, Confidence, Moderation',
      'Reversed': 'Conflict, Disunion, Frustration, Impatience, Discord'},
     {"name": 'The Tower', 'Upright': 'Disruption, Abandonment, Bankruptcy, Downfall, Unexpected Events',
@@ -46,84 +49,68 @@ deck = [
      'Reversed': 'Lack of Vision, Disappointment, Imperfection'},
 ]
 
-number_card = input("Hello my friend. How many cards would you like in your spread today? ")
-card_amount = int(number_card)
-spread = []
-num = random.randint(1, len(deck) - 1 )
-#card = deck[num]
-inverse = random.randint(-1, 0)
-defs = []
-names = []
-collective = {}
+root = Tk()
+root.title("Tarot reading")
+
+mainframe = ttk.Frame(root, padding = "3 3 12 12")
+mainframe.grid(column=0, row=0, sticky =( N, W, E, S))
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
 
 
-class TarotHand:
-    def __init__(self):
-        pass
 
-    # this function is used to grab cards from the deck at random for the tarot spread
-    def tarot_spread(self, card_amount, spread):
-        self.card_amount = card_amount
-        #card = deck.object[random.randint(1, len(deck) - 1)]
-        global deck
+
+class Tarot:
+
+    def __init__(self) -> None:
         
-        while len(spread) < card_amount:
-            spread.append(deck[num])
-            if IndexError:
+        self.number_card = int(input("Hello my friend. How many cards would you like in your spread today? "))
+        self.hand = []
+        
+
+        
+
+    def cards(self):
+        deck1 = deck.copy()
+        counter = self.number_card
+        # self.hand = []
+        show_hand = []
+        ran_num = random.randint(0,len(deck1))
+        card_number = ran_num
+        inverse = random.randint(1,2)
+
+    
+        while len(self.hand) < counter:
+            
+            card = random.choice(deck1)
+            if card in self.hand:
                 pass
-            for thing in spread:
-                if thing in deck:
-                    deck.remove(thing)
-
-
-            continue
-                #spread  (deck["name"[random.randint(1, len(deck) - 1)]])
-
-
-
-       # print(spread)
-        return str(names)
-
-
-
-    def tarot_visual(self, spread):
-        global inverse
-# this function needs to return inverse or upright for every value in spread.
-
-        for object in spread:
-
-            inverse = random.randint(-1, 0)
-            if inverse == -1:
-                print(str(object["name"]) + " inverse")
-                defs.append(object["Reversed"])
-                names.append(object["name"])
-                continue
-
-
-            if inverse == 0:
-                print(str(object["name"]) + " upright")
-                defs.append(object["Upright"])
-                names.append(object["name"])
-                continue
             else:
-                print(str(object["name"]) + " upright")
-                defs.append(object["Upright"])
-                continue
+                self.hand.append(card)
+                deck1.remove(card)
 
+        name = []        
+        # while len(name) > counter :
+        for x in self.hand:
+               
+            name.append(x['name'])
+            a = x['Upright']
+            b = x['Reversed']
+            choices = [a,b]
+            show_hand.append(random.choice(choices))
+        # print(show_hand)
+        spread = {name[i]:show_hand[i] for i in range(len(name))}
+        for j in spread.keys():
+            print (" Your card " + j + " symbolizes: " + spread[j])
 
+        # return show_hand
 
-        return str(defs)
+    # def show_hands(self, show_hand):
+    #     print(show_hand)
+    #     # return spread.values(), spread.keys()
 
-    def printable(self, defs, names):
-        global collective
-
-        collective = dict(zip(names, defs))
-        for name, reading in collective.items():
-            print("Your card " + name +" says your future holds: " + reading)
-
-
-
-tarot = TarotHand()
-(tarot.tarot_spread(card_amount, spread))
-(tarot.tarot_visual(spread))
-print(tarot.printable(defs, names))
+        
+    
+         
+first = Tarot()
+print(first.cards())

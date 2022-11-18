@@ -1,0 +1,2 @@
+# Tarot_project-main
+# This project was a way for me to play around with functions and inputs and outputs. I use it to teach myself new concepts, to make the script more effecient, and to try out new concepts that I am learning. Currently it is a simple fortune telling script that will deliver a small peek at your future. Evantually I will add in GUI functionality and create a branch to practice with Web Applications as well.
